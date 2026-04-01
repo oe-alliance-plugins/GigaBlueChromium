@@ -1,0 +1,18 @@
+{
+  "branch": "main",
+  "depends_recipe": "",
+  "description_control": "E2 Chromium Plugin",
+  "description_recipe": "E2 Chromium Plugin",
+  "history_source_dir": "GigaBlueChromium",
+  "internal_package_name": "enigma2-plugin-extensions-chromium",
+  "module_dir_name": "GigaBlueChromium",
+  "output_subdir": "GigaBlueChromium",
+  "package_name": "enigma2-plugin-extensions-chromium-giga-blue-chromium",
+  "plugin_src_rel": "GigaBlueChromium",
+  "python_package": "GigaBlueChromium",
+  "rdepends_recipe": "",
+  "replaces": "",
+  "repo_name": "GigaBlueChromium",
+  "rrecommends": "",
+  "rreplaces": ""
+}
