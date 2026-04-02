@@ -71,13 +71,13 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
 
 	def makeConfigList(self):
 		self.menulist = []
-#		entryUri = getConfigListEntry(_("YouTube TV URL"), config.plugins.browser.youtube_uri)
+# entryUri = getConfigListEntry(_("YouTube TV URL"), config.plugins.browser.youtube_uri)
 		entryShowHelp = getConfigListEntry(_('Do not show YouTube TV Starter again'), config.plugins.browser.youtube_showhelp)
 		entryEnableNtpd = getConfigListEntry(_('Enable Ntpd when start YoutubeTV'), config.plugins.browser.youtube_enable_ntpd)
 		entryNtpdUri = getConfigListEntry(_('Ntpd URL'), config.plugins.browser.youtube_ntpd_url)
 		showInMainmenu = getConfigListEntry(_('Show in mainmenu'), config.plugins.browser.youtube_mainmenu)
 		showInExtmenu = getConfigListEntry(_('Show in extensions'), config.plugins.browser.youtube_extmenu)
-#		self.menulist.append(entryUri)
+# self.menulist.append(entryUri)
 		self.menulist.append(entryShowHelp)
 		self.menulist.append(entryEnableNtpd)
 		if config.plugins.browser.youtube_enable_ntpd.value is True:

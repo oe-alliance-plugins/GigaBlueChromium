@@ -77,14 +77,14 @@ class ChromiumOSSettings(ConfigListScreen, Screen):
 		entryMarginY = getConfigListEntry(_('Y-margin on GUI'), config.plugins.browser.margin_y)
 		entryEnableNtpd = getConfigListEntry(_('Enable Ntpd when start ChromiumOS'), config.plugins.browser.enable_ntpd)
 		entryNtpdUri = getConfigListEntry(_('Ntpd URL'), config.plugins.browser.ntpd_url)
-#		entryRcuType = getConfigListEntry(_("RCU language type"), config.plugins.browser.rcu_type)
+# entryRcuType = getConfigListEntry(_("RCU language type"), config.plugins.browser.rcu_type)
 		self.menulist.append(entryStartUp)
 		self.menulist.append(entryMarginX)
 		self.menulist.append(entryMarginY)
 		self.menulist.append(entryEnableNtpd)
 		if config.plugins.browser.enable_ntpd.value is True:
 			self.menulist.append(entryNtpdUri)
-#		self.menulist.append(entryRcuType)
+# self.menulist.append(entryRcuType)
 		self['config'].list = self.menulist
 		self['config'].l.setList(self.menulist)
 
@@ -287,8 +287,8 @@ class ChromiumOSWindow(ConfigListScreen, Screen):
 	def makeConfigList(self):
 		self.menulist = []
 		entryURL = getConfigListEntry(_('Start URL'), config.plugins.browser.startup)
-#		entryRcuType = getConfigListEntry(_("RCU Type"), config.plugins.browser.rcu_type)
+# entryRcuType = getConfigListEntry(_("RCU Type"), config.plugins.browser.rcu_type)
 		self.menulist.append(entryURL)
-#		self.menulist.append(entryRcuType)
+# self.menulist.append(entryRcuType)
 		self['config'].list = self.menulist
 		self['config'].l.setList(self.menulist)
