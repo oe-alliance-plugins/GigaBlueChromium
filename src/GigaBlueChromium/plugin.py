@@ -302,12 +302,12 @@ def session_start_main(session, reason, **kwargs):
 
 
 def Plugins(**kwargs):
-	l = []
-	l.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=session_start_main))
+	items = []
+	items.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=session_start_main))
 	if config.plugins.browser.youtube_mainmenu.getValue():
-		l.append(PluginDescriptor(name=_('YouTubeTV'), where=PluginDescriptor.WHERE_MENU, icon='youtubetv.png', fnc=menu_start_youtube))
+		items.append(PluginDescriptor(name=_('YouTubeTV'), where=PluginDescriptor.WHERE_MENU, icon='youtubetv.png', fnc=menu_start_youtube))
 	if config.plugins.browser.youtube_extmenu.getValue():
-		l.append(PluginDescriptor(name=_('YouTubeTV'), where=PluginDescriptor.WHERE_PLUGINMENU, icon='youtubetv.png', fnc=start_youtubetv_main))
-	l.append(PluginDescriptor(name=_('YouTubeTV Settings'), where=PluginDescriptor.WHERE_PLUGINMENU, icon='youtubetv.png', fnc=plugin_setting_youtube))
-	l.append(PluginDescriptor(name=_('ChromiumOS'), description=_('Start ChromiumOS'), where=PluginDescriptor.WHERE_PLUGINMENU, icon="chromium.png", needsRestart=True, fnc=plugin_start_chromiumos))
-	return l
+		items.append(PluginDescriptor(name=_('YouTubeTV'), where=PluginDescriptor.WHERE_PLUGINMENU, icon='youtubetv.png', fnc=start_youtubetv_main))
+	items.append(PluginDescriptor(name=_('YouTubeTV Settings'), where=PluginDescriptor.WHERE_PLUGINMENU, icon='youtubetv.png', fnc=plugin_setting_youtube))
+	items.append(PluginDescriptor(name=_('ChromiumOS'), description=_('Start ChromiumOS'), where=PluginDescriptor.WHERE_PLUGINMENU, icon="chromium.png", needsRestart=True, fnc=plugin_start_chromiumos))
+	return items
