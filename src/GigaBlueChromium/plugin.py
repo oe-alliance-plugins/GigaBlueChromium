@@ -4,6 +4,7 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.config import config
+from Components.SystemInfo import BoxInfo
 
 import time
 import subprocess
@@ -20,6 +21,7 @@ _g_launcher_handler = None
 pipc._SOCKETFILE = '/tmp/.chromium.sock'
 cbcfg.INIT(cbcfg._ERROR)
 _g_locked = False
+IS_VUDUO4KLITE = BoxInfo.getItem('machinebuild') == 'vuduo4klite'
 
 
 def enigma2_lock():
@@ -103,7 +105,10 @@ class BBrowserLauncher(Screen):
 		self.pServerThread.open(timeout=1)
 		self.pServerThread.start()
 		self.closeTimer = eTimer()
-		self.closeTimer.timeout.get().append(self._cb_CloseTimer)
+		if IS_VUDUO4KLITE:
+			self.closeTimer.callback.append(self._cb_CloseTimer)
+		else:
+			self.closeTimer.timeout.get().append(self._cb_CloseTimer)
 		_g_launcher_handler = self
 		cbcfg.g_service = session.nav.getCurrentlyPlayingServiceReference()
 		if cbcfg.g_service is not None:
@@ -157,11 +162,16 @@ class BBrowserLauncher(Screen):
 			except Exception:
 				pass
 
+		if IS_VUDUO4KLITE:
+			self.browserProcess = subprocess.Popen(command, shell=True)
+			enigma2_lock()
+			self.closeTimer.start(2000)
+		else:
 			command += '&'
-		subprocess.call(command, shell=True)
-		self.enigma2LockTimer = eTimer()
-		self.enigma2LockTimer.timeout.get().append(self._cb_enigma2LockTimer)
-		self.enigma2LockTimer.start(2000)
+			subprocess.call(command, shell=True)
+			self.enigma2LockTimer = eTimer()
+			self.enigma2LockTimer.timeout.get().append(self._cb_enigma2LockTimer)
+			self.enigma2LockTimer.start(2000)
 		self.virtual_keyboard_data = None
 		self.virtual_keyboard_closed = True
 
@@ -208,6 +218,9 @@ class BBrowserLauncher(Screen):
 	def _cb_CloseTimer(self):
 		print('BBrowserLauncher:_cb_CloseTimer')
 		self.closeTimer.stop()
+		if IS_VUDUO4KLITE and self.browserProcess.poll() is None:
+			self.closeTimer.start(500)
+			return
 		self.pServerThread.kill()
 		self.pServerThread.join()
 		enigma2_unlock()
